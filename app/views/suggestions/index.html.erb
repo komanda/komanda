@@ -1,0 +1,66 @@
+<div class="row">
+	<div class="pull-right facebook" style="width: 90px; height: 30px">
+		<div class="fb-like" data-send="false" 
+			data-layout="button_count" data-width="450" data-show-faces="true"></div>
+	</div>
+	
+	<div class="span7">
+		
+		<p class="lead center">
+			Have a great idea for a party but too busy to organize it all on your own?
+			Suggest the party here and we	just might make it a reality!
+		</p>
+		
+		<p class="center">
+			<% if current_user %>
+				<% if @suggestions.count > 0 %>
+					<button class="btn btn-primary btn-large hidden-phone" 
+						data-target="#suggestion-modal" data-toggle="modal" data-keyboard="true">
+						Suggest</button>
+				
+					<%= link_to "Suggest", new_suggestion_path, 
+						class: "btn btn-primary btn-large visible-phone" %>
+					
+				<% else %>
+					<button id="suggestion-button" class="btn btn-primary btn-large hidden-phone hide" 
+						data-target="#suggestion-modal" data-toggle="modal" data-keyboard="true">
+						Suggest</button>
+						
+					<%= render 'form' %>
+				<% end %>
+			<% else %>
+				<%= link_to "Suggest", signin_path, class: "btn btn-primary btn-large hidden-phone" %>
+				<%= link_to "Suggest", signin_path, class: "btn btn-primary btn-large visible-phone" %>
+			<% end %>
+		</p>
+			
+		<% if @suggestions.count > 0 %>
+			
+			<div class="separator"></div>
+			
+			<div class="row">
+				<div class="span3">
+					<h4>Suggestions (<span id="suggestions-count"><%= @suggestions.count %></span>)</h4>
+				</div>
+				
+				<div class="pull-right">
+					<%= render 'sort' %>
+				</div>
+			</div>
+			
+			<div class="suggestions-container">
+				<div class="center sort-loading"><i class="icon-spinner icon-spin icon-3x"></i></div>
+				<div id="suggestions">
+					<%= render @suggestions %>
+				</div>
+			</div>
+		<% end %>
+		
+	</div>
+	
+	<aside class="offset1 span4 event-navbar">
+		<%= render "events/event_full_nav" %>
+	</aside>
+</div>
+
+<%= render 'modal' %>

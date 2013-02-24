@@ -1,0 +1,41 @@
+<div class="default">
+	<p class="lead muted">
+		Ratings (<span id="ratings-count"><%= @event.ratings.count %></span>)
+	</p>
+	
+	<div class="alert alert-error hide" id="rating-error">
+		<i class="icon-exclamation-sign"></i> Oops, something went wrong. Try reloading the page.
+	</div>
+	<div class="rating">
+		<% if current_user %>				
+				<div id="rate" val="<%= @event.rating %>">
+					<% for i in 1..@event.rating %>
+						<%= link_to image_tag("star.png", size: "35x0"),
+							"#{rate_event_path(@event)}?rating=#{i}" %>
+					<% end -%>
+
+					<% for i in 1 + @event.rating..5 %>
+						<%= link_to image_tag("star_empty.png", size: "35x0"), 
+							"#{rate_event_path(@event)}?rating=#{i}" %>
+					<% end -%>
+				</div> 
+		<% else %>
+			
+			<%= link_to signin_path do  %>
+					<% for i in 1..@event.rating %>
+						<%= image_tag("star.png", size: "35x0") %>
+					<% end -%>
+
+					<% for i in 1 + @event.rating..5 %>
+						<%= image_tag("star_empty.png", size: "35x0") %>
+					<% end -%> 
+				</a>
+			<% end %>
+			
+		<% end -%>
+		
+		<i class='icon-spinner icon-spin icon-large' id="rating-loading"></i>
+		
+	</div>
+</div>
+

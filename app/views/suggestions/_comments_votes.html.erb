@@ -1,0 +1,34 @@
+<div class="suggestion-stats muted">
+	
+	<% if current_user %>
+		<%= link_to star_suggestion_path(suggestion), class: "star", 
+			id: "star-link-#{suggestion.id}", remote: true do %>
+			<%= image_tag(suggestion.stars.include?(current_user.id) ? "star.png" : "star_empty.png") %>
+		<% end %>		
+		
+	<% else %>
+		<%= link_to image_tag("star.png"), signin_path %>
+	<% end %>
+	<span id="star-count-<%= suggestion.id %>"><%= suggestion.stars.count %></span>
+	| 
+	<span id="comment-toggle-container-<%= suggestion.id %>">
+		<% if suggestion.comments.count > 0 %>
+			<%= link_to	suggestion_comments_path(suggestion), 
+				class: "comment-toggle",
+				id: "comment-toggle-#{suggestion.id}",
+				"data-toggle" => "collapse", 
+				"data-target" => "#comments-#{suggestion.id}", 
+				remote: true do %>
+					<span id="comments-count-<%= suggestion.id %>">
+						<%= pluralize(suggestion.comments.count, "Comment") %>
+			<% end %>		
+		<% else %>
+			<%= link_to	"#", class: "comment-toggle",
+				id: "comment-toggle-#{suggestion.id}",
+				"data-toggle" => "collapse", 
+				"data-target" => "#comments-#{suggestion.id}" do %>
+				<span id="comments-count-<%= suggestion.id %>">Comment</span>
+			<% end %>
+		<% end %>
+	</span>
+</div>

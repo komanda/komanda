@@ -1,0 +1,41 @@
+<article id="<%= dom_id share %>" class="media default">
+	<% if authenticated_user?(share) %>
+		<%= link_to "×", share, 
+			class: "close", 
+			"rel"=>"tooltip",
+			"data-placement"=>"left",
+			"title"=>"Delete",
+			method: :delete, remote: true %>
+	<% end -%>
+	
+	<div class="row">
+		<div class="span4">Shared by <%= link_to share.user.name, share.user.profile_url, target: "_blank" %>
+			<small class="muted"><%= time_ago_in_words share.created_at %></small>
+		</div>
+	</div>
+	<hr>
+	
+	<table>
+		<tr>
+			<td class="icon"><i class="icon-calendar"></i></td>
+			<td class="content"><%= time_tag share.date, format: "%B %e" %>, 
+				<%= time_tag share.time, format: "%l:%M %P" %></td>
+		</tr>
+		
+		<% if share.content %>		
+			<tr>
+				<td class="icon"><i class="icon-info-sign"></i></td>
+				<td class="content"><%= share.content %></td>
+			</tr>
+		<% end %>
+	
+		<% if share.url %>
+			<tr>
+				<td class="icon"><i class="icon-link"></i></td>
+				<td class="content"><a href="<%= share.url %>"><%= truncate share.url, length: 35 %></a></td>
+			</tr>
+		<% end %>
+	</table>	
+	
+</article>
+

@@ -1,0 +1,17 @@
+<h3>
+	K-stuff
+	<div class="pull-right facebook" style="width: 90px; height: 30px">
+		<div class="fb-like" data-send="false" 
+			data-layout="button_count" data-width="450" data-show-faces="true"></div>
+	</div>
+</h3>
+
+<% if notice %>
+	<div class="alert alert-success center">
+		<%= notice %>
+	</div>
+<% end %>
+
+<div class="row">
+	<%= render @products %>
+</div>

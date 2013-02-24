@@ -1,0 +1,49 @@
+
+<% if notice %>
+	<div class="alert alert-success">
+		<%= notice %>
+	</div>
+<% end %>
+
+<h2>
+	<%= @event.name %>
+	<div class="pull-right facebook" style="width: 90px; height: 30px">
+		<div class="fb-like" data-send="false" 
+			data-layout="button_count" data-width="450" data-show-faces="true"></div>
+	</div>
+</h2>
+
+<div class="separator"></div>
+
+<table>
+	<tr>
+		<td class="icon"><i class="icon-calendar"></i></td>
+		<td>
+			<%= time_tag @event.date, format: "%B %e" %>, 
+			<%= time_tag @event.time, format: "%l:%M %P" %>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><i class="icon-map-marker"></i></td>	
+		<td><%= link_to @event.address, @event.map_link, target: "_blank" %></td>
+	</tr>
+	
+	<tr>
+		<td><i class="icon-info-sign"></td>	
+		<td><%= raw @event.description %></td>
+	</tr>
+	
+	<tr>
+		<td><i class="icon-comments"></i></td>
+		<td>			
+			<strong id="comment-count"><%= pluralize @event.comments.count, "Comment" %></strong>
+		</td>
+	</tr>
+</table>
+
+<div id="comments">
+	<%= render @event.comments, commentable: @event %>
+</div>
+<%= render "comments/form", commentable: @event %>
+

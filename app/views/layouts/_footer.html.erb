@@ -1,0 +1,33 @@
+<footer id="footer">
+
+	<div class="container">
+		<%= link_to (image_tag "star_empty.png", size: "40x30"), root_path, class: "pull-right" %>
+		
+		<ul class="nav nav-pills">
+			<li><%= link_to "Contact", "/contact" %> <span class="muted"></span>
+			<li><a href="#donate-modal" data-toggle="modal" data-keyboard="true">Donate</a></li>
+			<li><%= link_to "Events", events_path %></li>
+			<li class="visible-desktop"><%= link_to "Suggestions", suggestions_path %></li>
+			<li class="visible-desktop"><%= link_to "Shares", shares_path %></li>
+		</ul>
+
+		<div id="donate-modal" class="modal fade hide">
+			<div class="modal-header center">
+				<button type="button" class="close modal-close" 
+					data-dismiss="modal" aria-hidden="true">×</button>
+				<h3>Make a donation</h3>
+			</div>
+			<div class="modal-body center">
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+				<input type="hidden" name="cmd" value="_s-xclick">
+				<input type="hidden" name="hosted_button_id" value="FUYG2NDH7AYC2">
+				<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" 
+					border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+				<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+				</form>
+			</div>
+		</div>
+	</div>
+	
+</footer>
+

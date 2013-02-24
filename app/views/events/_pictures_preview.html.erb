@@ -1,0 +1,23 @@
+<div class="default clearfix">
+	<p class="lead muted">Pictures (<%= @event.pictures.count %>)</p>
+	
+	<div id="pictures-sidebar">
+		<% if @event.pictures.count <= 9 %>
+
+			<% @event.pictures.each do |picture| %>
+				<%= link_to (image_tag (thumb_url picture)), pictures_event_path(@event) %>
+			<% end %>
+
+		<% else %>
+			<% for i in 0..8 %>
+				<%= link_to (image_tag (thumb_url @event.pictures[i])), pictures_event_path(@event) %>
+			<% end %>
+		<% end %>
+	</div>
+	
+	<% if @event.pictures.count > 9 %>
+		<p>
+			<%= link_to "See all", pictures_event_path(@event) %>
+		</p>
+	<% end %>
+</div>

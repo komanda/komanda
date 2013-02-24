@@ -1,0 +1,156 @@
+<style>
+	.row {
+	  margin-left: -20px;
+	  *zoom: 1;
+	}
+	.row:before,
+	.row:after {
+	  display: table;
+	  content: "";
+	  line-height: 0;
+	}
+	.row:after {
+	  clear: both;
+	}
+	@media (min-width: 768px) and (max-width: 979px) {
+	  .row {
+	    margin-left: -20px;
+	    *zoom: 1;
+	  }
+	  .row:before,
+	  .row:after {
+	    display: table;
+	    content: "";
+	    line-height: 0;
+	  }
+	  .row:after {
+	    clear: both;
+	  }
+		.span3 {
+	    width: 166px;
+	  }
+	}
+	@media (min-width: 1200px) {
+	  .row {
+	    margin-left: -30px;
+	    *zoom: 1;
+	  }
+	  .row:before,
+	  .row:after {
+	    display: table;
+	    content: "";
+	    line-height: 0;
+	  }
+	  .row:after {
+	    clear: both;
+	  }
+		.span3 {
+	    width: 270px;
+	  }
+	}
+	.span3 {
+	  width: 220px;
+	}
+	
+	.table {
+	  width: 100%;
+	  margin-bottom: 20px;
+	}
+	.table th,
+	.table td {
+	  padding: 8px;
+	  line-height: 20px;
+	  text-align: left;
+	  vertical-align: top;
+	  border-top: 1px solid #dddddd;
+	}
+	.table th {
+	  font-weight: bold;
+	}
+	
+</style>
+
+<div class="row" style="margin:0 auto;width:60%">
+	
+	<div class="span3" style="float:right;width:30%">
+		<% if @event %>
+			<%= image_tag @event.flyer, size: "200x200" %>
+		<% else %>
+			<%= image_tag @product.pictures.first, size: "200x200" %>
+		<% end %>
+	</div>
+	
+	<div class="span3" style="float:left;width:60%;margin-right:10%">
+		<h3>Order Summary</h3>
+		
+		<table class="table" style="text-align:left;">
+			
+			<tr>
+				<th>Quantity</th>
+				<td><%= @order.quantity %></td>
+			</tr>
+			
+			<% if @product %>
+				<tr>
+					<th>Size</th>
+					<td><%= @order.size %></td>
+				</tr>
+			<% end %>
+			
+			<tr>
+				<th>Total</th>
+				<td><%= number_to_currency @order.price * @order.quantity %></td>
+			</tr>
+			
+			<tr>
+				<th>Order ID</th>
+				<td><%= @order.id %></td>
+			</tr>
+			
+			<tr>
+				<th>Transaction ID</th>
+				<td><%= @order.transactions.last.id %></td>
+			</tr>
+			
+		</table>
+		
+		
+		<% if @event %>
+			<h3>Billing Address</h3>
+		<% else %>
+			<h3>Shipping Address</h3>
+		<% end %>
+		
+		<table class="table" style="text-align:left;">
+			
+			<tr>
+				<th>To</th>
+				<td><%= @user.name %></td>
+			</tr>
+			
+			<tr>
+				<th>Address</th>
+				<td><%= @order.address %></td>
+			</tr>
+			
+			<tr>
+				<th>City</th>
+				<td><%= @order.city %></td>
+			</tr>
+			
+			<tr>
+				<th>State</th>
+				<td><%= @order.state %></td>
+			</tr>
+			
+			<tr>
+				<th>Zip Code</th>
+				<td><%= @order.zip %></td>
+			</tr>
+			
+		</table>
+	</div>
+	
+	
+</div>
+

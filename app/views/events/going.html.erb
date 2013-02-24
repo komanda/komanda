@@ -1,0 +1,13 @@
+<%= link_to @event, class: "pull-left back link-with-icon" do %>
+	<i class="icon-angle-left"></i> Back
+<% end %>
+
+<h3 class="center">		
+	Going (<%= @going.count %>)
+</h3>
+
+<div class="default">
+	<ul id="_going" class="unstyled">
+		<%= render @going %>
+	</ul>
+</div>

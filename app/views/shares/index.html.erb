@@ -1,0 +1,54 @@
+<div class="row">	
+	<div class="pull-right facebook" style="width: 90px; height: 30px">
+		<div class="fb-like" data-send="false" 
+			data-layout="button_count" data-width="450" data-show-faces="true"></div>
+	</div>
+	
+	<div class="span7">
+		
+		<p class="lead center">
+			Share an event with us!
+		</p>
+		
+		<p class="center">
+			<% if current_user %>
+				<% if @shares.count > 0 %>
+					<button class="btn btn-primary btn-large hidden-phone" 
+						data-target="#share-modal" data-toggle="modal">
+						Share
+					</button>
+
+					<%= link_to "Share", new_share_path, 
+						class: "btn btn-primary btn-large visible-phone" %>
+					
+					<%= render 'modal' %>
+				<% else %>
+					<%= render 'form' %>
+				<% end -%>
+			<% else %>
+				<%= link_to "Share", signin_path, 
+					class: "btn btn-primary btn-large hidden-phone" %>
+					
+				<%= link_to "Share", signin_path, 
+					class: "btn btn-primary btn-large visible-phone" %>
+			<% end -%>
+		</p>
+		
+		<% if @shares.count > 0 %>
+			<div class="separator"></div>
+			
+			<h4>Shares (<span id="shares-count"><%= @shares.count %></span>)</h4>
+			<div id="shares">
+				<% if @shares.count > 0 %>
+					<%= render @shares %>
+				<% end %>
+			</div>
+		<% end %>	
+	</div>
+	
+	<aside class="offset1 span4 event-navbar">
+		<%= render "events/event_full_nav" %>
+	</aside>
+</div>
+
+<%= render 'modal' %>

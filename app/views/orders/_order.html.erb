@@ -1,0 +1,56 @@
+<% if @event %>
+	<div class="row">
+		<%= image_tag @event.flyer, class: "span2" %>
+		<div class="span3">
+			<h4><%= @event.name %></h4>
+			<p>
+				<em><small class="muted"><%= time_tag @event.date, format: "%B %e" %>, 
+				<%= time_tag @event.time, format: "%l:%M %P" %></small></em>
+			</p>
+			<p>
+				<%= link_to @event.address, @event.map_link, target: "_blank" %>
+			</p>
+		</div>
+	</div>
+<% else %>
+	<div class="row">
+		<%= image_tag @product.pictures.first, class: "span2" %>
+		<div class="span3">
+			<h4><%= @product.name %></h4>
+		</div>
+	</div>
+<% end %>
+
+<br/>
+
+<table class="table table-bordered">
+	<tr>
+		<th>Name</th>
+		<td>
+			<%= @order.first_name %> <%= @order.last_name %>
+		</td>
+	</tr>
+	<tr>
+		<th>Order ID</th>
+		<td><%= @order.id %></td>
+	</tr>
+	<tr>
+		<th>Transaction ID</th>
+		<td><%= @order.transactions.last.id %></td>
+	</tr>
+
+	<tr>
+		<th>Price</th>
+		<td><%= number_to_currency @order.price %></td>
+	</tr>
+
+	<tr>
+		<th>Quantity</th>
+		<td><%= @order.quantity %></td>
+	</tr>
+
+	<tr class="info">
+		<th>Total</th>
+		<td><%= number_to_currency @order.transactions.last.amount/100 %></td>
+	</tr>
+</table>

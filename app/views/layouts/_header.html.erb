@@ -1,0 +1,39 @@
+<nav class="navbar navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+			<%= link_to root_path, class: "brand" do %>
+				<%= image_tag 'star.png', size: "40x40" %> komanda
+			<% end %>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+					<li class="<%= "active" if events_controller? %>">
+						<%= link_to "Events", root_path %></li>
+          <li class="<%= "active" if suggestions_controller? %>">
+						<%= link_to "Suggestions", suggestions_path %></li>
+					<li class="<%= "active" if shares_controller? %>">
+						<%= link_to "Shares", shares_path %></li>
+					<li class="<%= "active" if products_controller? %>">
+						<%= link_to "K-stuff", kstuff_path %></li>
+          <li><%= link_to "Contact", contact_path  %></li>
+        </ul>
+				<ul class="nav pull-right">
+					<li>
+						<% if current_user %>
+							<%= link_to current_user.profile_url, target: "_blank" do %>
+								<%= image_tag current_user.image_url, class: "profile-picture" %>
+								<%= current_user.name %>
+							<% end %>
+						<% else %>
+							<%= link_to "Sign in", signin_path %>
+						<% end %>
+					</li>
+				</ul>
+      </div>
+    </div>
+  </div>
+</nav>

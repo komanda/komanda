@@ -1,0 +1,53 @@
+<article class="default upcoming-event">
+	<div class="row">
+		<div class="span3">
+			<%= link_to image_tag(event.flyer), event %>
+		</div>
+		
+		<div class="span8">
+			<h3><%= event.name %>
+				<small>
+					
+				</small>	
+			</h3>
+			
+			<div class="separator"></div>
+			
+			<table>
+				<tr>
+					<td class="icon"><i class="icon-calendar"></i></td>
+					<td>
+						<%= time_tag event.date, format: "%B %e" %>, 
+						<%= time_tag event.time, format: "%l:%M %P" %>
+					</td>
+				</tr>
+
+				<tr>
+					<td><i class="icon-map-marker"></i></td>	
+					<td><%= link_to event.address, event.map_link, target: "_blank" %></td>
+				</tr>
+
+				<tr>
+					<td><i class="icon-info-sign"></td>	
+					<td>
+						<%= raw event.preview %>
+						<%= link_to "Continue...", event %>
+					</td>
+				</tr>
+			</table>
+			
+			<div class="separator"></div>
+			
+			<% if current_user %>
+				<%= link_to "Buy ticket", "#{new_order_path}?event_id=#{event.id}", class: "btn btn-primary" %>
+			<% else %>
+				<%= link_to "Buy ticket", signin_path, class: "btn btn-primary" %>
+			<% end %>
+			
+			<%= link_to "#{event_path(event)}#comments", class: "btn" do %>
+				<i class="icon-comments"></i> Comment
+			<% end %>
+			
+		</div>
+	</div>
+</article>

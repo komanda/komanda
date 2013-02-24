@@ -1,0 +1,59 @@
+<div class="default">
+	<% if @event.upcoming? %>
+		<% if current_user %>
+			<% if @event.users.include?(current_user) %>
+				<%= link_to "Going", "#", 
+						class: "btn btn-success disabled", 
+						id: "join",
+						remote: true %>
+			<% else %>
+				<%= link_to "Join", 
+						join_event_path, 
+						class: "btn btn-success", 
+						id: "join" %>
+			<% end %>
+		<% else %>
+			<%= link_to "Join", signin_path, class: "btn btn-success" %>
+		<% end %>
+		<div class="separator"></div>
+	<% end %>
+	
+	<p class="alert alert-error hide" id="error">
+		<i class="icon-exclamation-sign"></i>
+		Oops, something went wrong. Try reloading the page.
+	</p>
+	
+	<p class="lead muted">
+		Going (<span id="going-count"><%= @event.users.count %></span>):
+	</p>
+	
+	<ul class="unstyled clearfix" id="going">
+		<% @going.each do |user| %>
+			<li rel="tooltip" title="<%= user.name %>">
+				<%= link_to image_tag(user.image_url), 
+					user.profile_url, 
+					target: "_blank" %>
+			</li>
+		<% end %>
+	</ul>
+	
+	<% if @going.count > 8 %>
+		<p>
+			<%= link_to "See all", 
+					going_event_path(@event),
+					class: "hidden-phone",
+					"data-target" => "#going-modal",
+					"data-toggle" => "modal",
+					remote: true
+			%>
+			
+			<%= link_to "See all", 
+					going_event_path(@event),
+					class: "visible-phone"
+			%>
+		</p>
+		
+		<%= render 'modal' %>
+	<% end %>
+	
+</div>

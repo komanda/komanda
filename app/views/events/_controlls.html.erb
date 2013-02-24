@@ -1,0 +1,15 @@
+<div class="default controlls">
+	<%= link_to edit_event_path(@event) do %>
+		<i class="icon-edit"></i> Edit
+	<% end %> 
+	<%= link_to @event,
+				method: :delete, 
+				:data => { :confirm => 'Are you sure you want to delete this event?' } do %>
+		<i class="icon-trash"></i> Delete
+	<% end %>
+	
+	<div class="separator"></div>
+	
+	<p><span class="muted">Views:</span> <strong><%= @event.views %></strong></p>
+	<p><span class="muted">Tickets:</span> <strong><%= @event.tickets_sold %></strong></p>
+</div>

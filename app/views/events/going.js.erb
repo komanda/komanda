@@ -1,0 +1,8 @@
+var going = ""
+
+<%= @going.each do |user| %>
+	going += "<%= escape_javascript(render user) %>"
+<% end %>
+
+$("#going-modal-effect").hide()
+$("#_going").append(going)

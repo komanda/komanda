@@ -1,0 +1,26 @@
+<% if admin_user? %>
+	<%= render 'controlls' %>
+<% end %>
+
+<div class="default">
+	<%= image_tag @event.flyer %>
+	
+	<% if @event.upcoming? %>
+		<div class="separator"></div>
+		<% if current_user %>
+			<%= link_to "Buy ticket", "#{new_order_path}?event_id=#{@event.id}", 
+				class: "btn btn-primary" %>
+		<% else %>
+			<%= link_to "Buy ticket", signin_path, class: "btn btn-primary" %>
+		<% end %>
+	<% end %>
+	
+</div>
+
+<%= render 'rating' %>
+
+<%= render 'going_preview' %>
+
+<% if @event.pictures.count > 0 %>
+	<%= render 'pictures_preview' %>
+<% end %>

@@ -1,0 +1,59 @@
+<div id="suggestion-modal" class="modal fade hide" data-keyboard="true">
+	
+	<div class="modal-header">
+		<button type="button" class="close modal-close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 class="center">New Suggestion</h3>
+	</div>
+	
+	<%= form_for @suggestion, html: { class: "form-horizontal default" }, remote: true do |f| %>
+		<div class="modal-body">
+
+			<div class="alert alert-error center hide" id="suggestion-error">
+				<i class="icon-exclamation-sign"></i> At least one of the fields must be filled out.
+			</div>
+
+			<div class="control-group">
+				<div class="control-label"><%= f.label :location %></div>
+				<div class="controls">
+					<%= f.text_field :location, class: "input-xlarge" %>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<div class="control-label"><%= f.label :music %></div>
+				<div class="controls">
+					<%= f.text_field :music, class: "input-xlarge" %>
+				</div>
+			</div>
+
+
+			<div class="control-group">
+				<div class="control-label"><%= f.label :games %></div>
+				<div class="controls">
+					<%= f.text_field :games, class: "input-xlarge" %>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<div class="control-label"><%= f.label :food_drinks, "Food/Drinks" %></div>
+				<div class="controls">
+					<%= f.text_field :food_drinks, class: "input-xlarge" %>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<div class="control-label"><%= f.label :other %></div>
+				<div class="controls">
+					<%= f.text_field :other, class: "input-xlarge" %>
+				</div>
+			</div>
+			
+			<div class="controls">
+		    <%= f.submit "Post", class: "btn btn-primary", id: "submit" %>
+				<button class="btn btn-primary hide" id="dummy-button">
+					<i class="icon-spinner icon-spin"></i></button>
+		    <button class="btn" data-dismiss="modal"> Cancel</button>
+			</div>
+		</div>
+	<% end %>
+</div>

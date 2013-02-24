@@ -1,0 +1,29 @@
+<article id="<%= dom_id comment %>" class="media comment">
+	<% if authenticated_user?(comment) %>
+		
+		<% if commentable.class.to_s == "Event" %>
+			<%= link_to "×", event_comment_path(commentable, comment), 
+				class: "close", 
+				method: :delete, remote: true %>
+		<% else %>
+			<%= link_to "×", suggestion_comment_path(commentable, comment), 
+				class: "close", 
+				method: :delete, remote: true %>
+		<% end %>
+		
+	<% end %>
+	
+	<%= link_to image_tag(comment.user.image_url),
+		comment.user.profile_url, 
+		class: "pull-left",
+		target: "_blank" %>
+
+	<div class="media-body">
+		<div class="media-heading">
+			<%= link_to comment.user.name, comment.user.profile_url, target: "_blank" %>
+			<small class="muted"><%= time_ago_in_words(comment.created_at) %> ago</small>
+		</div>
+		<%= comment.content %>
+	</div>
+</article>
+

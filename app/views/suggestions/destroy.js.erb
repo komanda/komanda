@@ -1,0 +1,2 @@
+$("#suggestions-count").text("<%= @count - 1 %>")
+$("#<%= dom_id @suggestion %>").slideUp(function() { $("#<%= dom_id @suggestion %>").remove() })

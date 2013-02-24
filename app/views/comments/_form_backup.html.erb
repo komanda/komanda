@@ -1,0 +1,26 @@
+<% if current_user %>
+	<article id="form" class="media">
+		<div id="empty-comment-error" class="alert alert-error center hide">
+			<i class="icon-exclamation-sign"></i> Empty comment.
+		</div>
+		
+		<div id="comment-error" class="alert alert-error center hide">
+			<i class="icon-exclamation-sign"></i> Oops, something went wrong. Try reloading the page.
+		</div>
+		
+		<%= link_to image_tag(current_user.image_url),
+			current_user.profile_url, 
+			class: "pull-left",
+			target: "_blank" %>
+
+		<div class="media-body">
+			<div class="media-heading">
+				<%= text_field_tag "content", nil, placeholder: "Leave a comment", class: "span6", id: "content" %>
+				<%= link_to "Post", "/events/#{@event.id}/comments", class: "btn btn-primary", id: "post", mothod: :post %>
+			</div>
+		</div>
+	</article>
+	
+<% else %>
+	<div class="alert alert-info center"><%= link_to "Sign in", signin_path %> to leave a comment.</div>
+<% end %>

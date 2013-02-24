@@ -1,0 +1,34 @@
+$("#suggestions").html("<%= escape_javascript(render @suggestions) %>")
+fix_star_links()
+fix_comment_loading_effect()
+fix_comment_toggle()
+remove_loading_effect()
+
+function fix_star_links() {
+	$(".star").click(function() {
+		star = $(this).find("img").first()
+		if ($(star).attr("src") == "/assets/star.png") { 
+			$(star).attr("src", "/assets/star_empty.png") 
+		} else {
+			$(star).attr("src", "/assets/star.png")
+		}
+	})
+}
+
+function remove_loading_effect() {
+	$(".sort-loading").hide()
+	$("#suggestions").css("opacity", 1)
+}
+
+function fix_comment_loading_effect() {
+	$(".post-comment").click(function() {
+		$(this).hide().next().show()
+	})
+}
+
+function fix_comment_toggle() {
+	$(".comment-toggle").click(function(e) {
+		e.preventDefault()
+		$(this).parent().parent().siblings().find(".loading-comments").first().show()
+	})
+}

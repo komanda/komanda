@@ -1,0 +1,20 @@
+function clean_up() {
+	$("#share-modal").modal('hide')
+	$("#share-error").hide()
+	$("#new_share input").val("")
+	$("#new_share textarea").val("")
+	$("#submit").val("Post")
+}
+
+<% if @share.errors.count > 0 %>
+	$("#share-error").slideDown()
+<% else %>
+	$("#shares-count").text("<%= @count %>").effect('highlight', {color: '#FCF8E3'}, 2000)
+	$("#shares").prepend("<%= escape_javascript(render @share) %>")
+	$("#<%= dom_id @share %>").effect('highlight', {color: '#FCF8E3'}, 2000)
+	
+	clean_up()
+<% end %>	
+
+$("#submit").toggle()
+$("#dummy-button").toggle()

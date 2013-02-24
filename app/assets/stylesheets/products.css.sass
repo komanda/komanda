@@ -1,0 +1,37 @@
+@import 'mixins'
+
+.product
+	+box-sizing
+	+transition(0.2s)
+	overflow: hidden
+	position: relative
+	margin-bottom: 20px
+	padding-bottom: 0
+	.admin
+		position: absolute
+		right: 10px
+		display: none
+		a
+			+text-shadow-params(0 1px 2px black)
+			color: white
+			margin-left: 5px
+	&:hover
+		.admin
+			display: block
+	.main-picture
+		margin: -10px
+		margin-bottom: 0
+		max-width: 110%
+	.thumbs
+		+box-shadow-inset
+		padding: 10px
+		margin: 0 -10px 10px
+		margin-bottom: 10px
+		background-color: rgba(128, 128, 128, 0.38)
+		img
+			+box-sizing
+			border: 2px solid rgba(128, 128, 128, 0)
+		.selected
+			border-color: rgba($base-color, 0.5)
+	.price
+		color: orange

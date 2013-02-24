@@ -1,0 +1,32 @@
+<% if current_user %>
+	<article id="form" class="media">
+		<div id="empty-comment-error-<%= commentable.id %>" 
+			class="alert alert-error center hide empty-comment-error">
+			<i class="icon-exclamation-sign"></i> Empty comment.
+		</div>
+		
+		<%= link_to image_tag(current_user.image_url),
+			current_user.profile_url, 
+			class: "pull-left",
+			target: "_blank" %>
+
+		<div class="media-body">
+			<div class="media-heading">
+				
+				<%= form_for [commentable, Comment.new], html: { class: "form" }, remote: true do |f| %>
+					
+					<%= f.text_area :content, rows: 2, class: "span5" %><br/>
+					
+					<%= f.submit "Post", class: "btn btn-primary post-comment",
+						id: "post-comment-#{commentable.id}", style: "width:55px" %>
+					<button class="btn btn-primary hide loading-comment" style="width:55px"
+						id="loading-comment-<%= commentable.id %>">
+						<i class="icon-spinner icon-spin"></i></button>
+				<% end %>
+			</div>
+		</div>
+	</article>
+	
+<% else %>
+	<div class="alert alert-info center" style="margin-top:19px"><%= link_to "Sign in", signin_path %> to leave a comment.</div>
+<% end %>

@@ -1,0 +1,65 @@
+<div>
+	<% if @upcoming.count > 0 %>
+		<h4 class="left">Upcoming event</h4>
+		
+		<% @upcoming.each do |e| %>
+			<% if e == @event %>
+				<div class="media default">
+					<%= image_tag e.flyer, class: "media-object pull-left", size: "40x40" %>
+
+					<div class="media-body">
+				    <h6 class="media-heading">
+				    	<%= e.name %>
+				    </h6>
+						<small class="muted"><%= time_tag e.date, format: "%B %e"%></small>
+				  </div>
+				</div>
+			<% else %>
+				<%= link_to e do %>
+					<div class="media">
+						<%= image_tag e.flyer, class: "media-object pull-left", size: "40x40" %>
+
+						<div class="media-body">
+					    <h6 class="media-heading">
+					    	<%= e.name %>
+					    </h6>
+							<small class="muted"><%= time_tag e.date, format: "%B %e"%></small>
+					  </div>
+					</div>
+				<% end %>
+			<% end %>
+		<% end %>
+		
+	<% end %>	
+	
+	<h4>Past events</h4>
+			
+	<% @past.each do |e| %>
+		<% if e == @event %>
+			<div class="media default">
+				<%= image_tag e.flyer, class: "media-object pull-left", size: "40x40" %>
+
+				<div class="media-body">
+			    <h6 class="media-heading">
+			    	<%= e.name %>
+			    </h6>
+					<small class="muted"><%= time_tag e.date, format: "%B %e"%></small>
+			  </div>
+			</div>
+		<% else %>
+			<%= link_to e do %>
+				<div class="media">
+					<%= image_tag e.flyer, class: "media-object pull-left", size: "40x40" %>
+
+					<div class="media-body">
+				    <h6 class="media-heading">
+				    	<%= e.name %>
+				    </h6>
+						<small class="muted"><%= time_tag e.date, format: "%B %e"%></small>
+				  </div>
+				</div>
+			<% end %>
+		<% end %>
+	<% end %>
+	
+</div>

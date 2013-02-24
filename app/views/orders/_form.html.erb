@@ -1,0 +1,182 @@
+<%= form_for @order, html: { class: "form-horizontal" } do |f| %>
+	<div class="alert">
+		We will not store your credit card information. 
+		All transactions are made through PayPal.
+	</div>
+	
+	<% if @order.errors.count > 0 %>
+		<div class="alert alert-error">
+			<% @order.errors.full_messages.each do |error| %>
+				<p><%= error %></p>
+			<% end %>
+		</div>
+	<% end %>
+
+	<% if @event %>
+		<h3><%= @event.name %></h3>
+		
+		<div class="row">
+			<%= image_tag @event.flyer, class: "span3" %>
+			<div class="span3">
+				
+				<table class="table">
+					<tr>
+						<th class="span2">Quantity</th>
+						<td><%= f.select :quantity, [1,2,3,4,5,6] %></td>
+					</tr>
+
+					<tr>
+						<th>Price</th>
+						<td id="price" price="<%= session[:price] %>">
+							<%= number_to_currency session[:price].to_i %>
+						</td>
+					</tr>
+					<tr class="info">
+						<th>Total</th>
+						<td id="total"><%= number_to_currency session[:price].to_i * @order.quantity %></td>
+					</tr>
+				</table>
+
+			</div>
+		</div>
+	<% elsif @product %>
+		<h3><%= @product.name %></h3>
+		
+		<div class="row">
+			<%= image_tag @product.pictures.first, class: "span3" %>
+			<div class="span3">
+				
+				<table class="table">
+					<tr>
+						<th class="span2">Quantity</th>
+						<td><%= f.select :quantity, [1,2,3,4,5,6] %></td>
+					</tr>
+
+					<tr>
+						<th>Size</th>
+						<td><%= f.select :size, ["S", "M", "L"] %></td>
+					</tr>
+
+					<tr>
+						<th>Price</th>
+						<td id="price" price="<%= session[:price] %>">
+							<%= number_to_currency session[:price].to_i %>
+						</td>
+					</tr>
+					<tr class="info">
+						<th>Total</th>
+						<td id="total"><%= number_to_currency session[:price].to_i * @order.quantity %></td>
+					</tr>
+				</table>
+					
+			</div>
+		</div>
+	<% end %>
+	
+	<br/>
+	
+	<p class="lead muted" style="text-align:center">
+		<% if @event %>
+			Billing Address
+		<% else %>
+			Shipping Address
+		<% end %>
+	</p>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :address, "Address*" %></div>
+		<div class="controls">
+			<%= f.text_field :address, class: "input-xlarge" %>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :city, "City*" %></div>
+		<div class="controls">
+			<%= f.text_field :city, class: "input-xlarge" %>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :state, "State*" %></div>
+		<div class="controls">
+			<%= f.text_field :state, class: "input-xlarge" %>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :zip, "Zip Code*" %></div>
+		<div class="controls">
+			<%= f.text_field :zip, class: "input-mini" %>
+		</div>
+	</div>
+	
+	<div class="separator"></div>
+	<p class="lead muted" style="text-align:center">Credit Card Information</p>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :email, "Email*" %></div>
+		<div class="controls">
+			<%= f.text_field :email, class: "input-xlarge", value: current_user.email %>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :first_name, "First Name*" %></div>
+		<div class="controls">
+			<%= f.text_field :first_name, class: "input-xlarge" %>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :last_name, "Last Name*" %></div>
+		<div class="controls">
+			<%= f.text_field :last_name, class: "input-xlarge" %>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :card_brand, "Card Brand*" %></div>
+		<div class="controls">
+			<%= f.select :card_brand, 
+			 	[["Visa", "visa"], 
+				["MasterCard", "master"], 
+				["Discover", "discover"], 
+				["American Express", "american_express"]],
+				style: "width:150px"%>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :card_number, "Card Number*" %></div>
+		<div class="controls">
+			<%= f.text_field :card_number, class: "input-xlarge" %>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :card_verification, "CVV*" %></div>
+		<div class="controls">
+			<%= f.text_field :card_verification, class: "input-mini" %>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :card_expires_on, "Expires On*" %></div>
+		<div class="controls">
+			<%= f.date_select :card_expires_on, 
+				:discard_day => true, 
+				:start_year => Date.today.year, 
+				:end_year => (Date.today.year + 8),
+				:use_month_numbers => true %>
+		</div>
+	</div>
+	
+	<div class="separator"></div>
+	
+	<div class="controls">
+		<%= f.submit "Buy", class: "btn btn-primary", id: "buy" %>
+		<button class="btn btn-primary hide" id="dummy"><i class="icon-spinner icon-spin"></i></button>
+		<%= link_to "Cancel", root_path, class: "btn" %>
+	</div>
+<% end %>

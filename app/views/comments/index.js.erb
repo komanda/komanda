@@ -1,0 +1,11 @@
+$("#suggestion-comments-<%= @commentable.id %>").html("<%= escape_javascript(render @comments, commentable: @commentable) %>")
+
+$("#comment-toggle-container-<%= @commentable.id %>").html("<a href='#' id='comment-toggle-<%= @commentable.id %>' data-toggle='collapse' data-target='#comments-<%= @commentable.id %>'><span id='comments-count-<%= @commentable.id %>'><%= pluralize(@commentable.comments.count, 'Comment') %></span></a>")
+
+$("#comment-toggle-<%= @commentable.id %>").click(function(e) {
+	e.preventDefault()
+})
+
+$("#loading-comments-<%= @commentable.id %>").remove()
+
+// TODO: FIX COMMENT LOADING EFFECT FOR SUGGESTIONS!

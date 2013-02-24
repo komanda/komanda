@@ -1,0 +1,172 @@
+<% if @count > 0 %>
+	<%= form_for @suggestion, html: { class: "form-horizontal default hidden-phone" }, 
+		remote: true do |f| %>
+
+		<h3 class="center">
+			New Suggestion
+		</h3>
+
+		<div class="alert alert-error center hide" id="suggestion-error">
+			<i class="icon-exclamation-sign"></i> At least one of the fields must be filled out.
+		</div>
+
+		<div class="control-group">
+			<div class="control-label"><%= f.label :location %></div>
+			<div class="controls">
+				<%= f.text_field :location, class: "input-large" %>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="control-label"><%= f.label :music %></div>
+			<div class="controls">
+				<%= f.text_field :music, class: "input-large" %>
+			</div>
+		</div>
+
+
+		<div class="control-group">
+			<div class="control-label"><%= f.label :games %></div>
+			<div class="controls">
+				<%= f.text_field :games, class: "input-large" %>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="control-label"><%= f.label :food_drinks, "Food/Drinks" %></div>
+			<div class="controls">
+				<%= f.text_field :food_drinks, class: "input-large" %>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="control-label"><%= f.label :other %></div>
+			<div class="controls">
+				<%= f.text_field :other, class: "input-large" %>
+			</div>
+		</div>
+
+		<div class="controls">
+	    <%= f.submit "Post", class: "btn btn-primary", id: "submit" %>
+			<button class="btn btn-primary hide" id="dummy-button">
+				<i class="icon-spinner icon-spin"></i></button>
+
+	    <%= link_to "Cancel", suggestions_path, class: "btn" %>
+		</div>
+	<% end %>
+	
+	<%= form_for @suggestion, html: { class: "form-horizontal default visible-phone" } do |f| %>
+
+		<h3 class="center">
+			New Suggestion
+		</h3>
+
+		<% if @suggestion.errors.count > 0 %>
+			<div class="alert alert-error center" id="suggestion-error">
+				<i class="icon-exclamation-sign"></i> At least one of the fields must be filled out.
+			</div>
+		<% end %>
+
+		<div class="control-group">
+			<div class="control-label"><%= f.label :location %></div>
+			<div class="controls">
+				<%= f.text_field :location, class: "input-large" %>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="control-label"><%= f.label :music %></div>
+			<div class="controls">
+				<%= f.text_field :music, class: "input-large" %>
+			</div>
+		</div>
+
+
+		<div class="control-group">
+			<div class="control-label"><%= f.label :games %></div>
+			<div class="controls">
+				<%= f.text_field :games, class: "input-large" %>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="control-label"><%= f.label :food_drinks, "Food/Drinks" %></div>
+			<div class="controls">
+				<%= f.text_field :food_drinks, class: "input-large" %>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="control-label"><%= f.label :other %></div>
+			<div class="controls">
+				<%= f.text_field :other, class: "input-large" %>
+			</div>
+		</div>
+
+		<div class="controls">
+	    <%= f.submit "Post", class: "btn btn-primary", id: "submit" %>
+			<button class="btn btn-primary hide" id="dummy-button">
+				<i class="icon-spinner icon-spin"></i></button>
+
+	    <%= link_to "Cancel", suggestions_path, class: "btn" %>
+		</div>
+	<% end %>
+	
+<% else %>
+	<%= form_for @suggestion, html: { class: "form-horizontal default" } do |f| %>
+
+		<h3 class="center">
+			New Suggestion
+		</h3>
+		<% if @suggestion.errors.count > 0 %>
+			<div class="alert alert-error center" id="suggestion-error">
+				<i class="icon-exclamation-sign"></i> At least one of the fields must be filled out.
+			</div>
+		<% end %>
+
+		<div class="control-group">
+			<div class="control-label"><%= f.label :location %></div>
+			<div class="controls">
+				<%= f.text_field :location, class: "input-large" %>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="control-label"><%= f.label :music %></div>
+			<div class="controls">
+				<%= f.text_field :music, class: "input-large" %>
+			</div>
+		</div>
+
+
+		<div class="control-group">
+			<div class="control-label"><%= f.label :games %></div>
+			<div class="controls">
+				<%= f.text_field :games, class: "input-large" %>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="control-label"><%= f.label :food_drinks, "Food/Drinks" %></div>
+			<div class="controls">
+				<%= f.text_field :food_drinks, class: "input-large" %>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="control-label"><%= f.label :other %></div>
+			<div class="controls">
+				<%= f.text_field :other, class: "input-large" %>
+			</div>
+		</div>
+
+		<div class="controls">
+	    <%= f.submit "Post", class: "btn btn-primary", id: "submit" %>
+			<button class="btn btn-primary hide" id="dummy-button">
+				<i class="icon-spinner icon-spin"></i></button>
+
+	    <%= link_to "Cancel", suggestions_path, class: "btn" %>
+		</div>
+	<% end %>
+	
+<% end %>

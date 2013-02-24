@@ -1,0 +1,40 @@
+<% if @commentable.class.to_s == "Event" %>
+
+	<% if @comment.content.blank? %>
+		$(".empty-comment-error").slideDown("fast")
+	<% else %>
+		$("#comments").append("<%= escape_javascript(render @comment, commentable: @commentable) %>")
+		$("#<%= dom_id @comment %>").effect('highlight', {color: '#FCF8E3'}, 2000)
+		$(".empty-comment-error").hide()
+		$("#comment_content").val("")
+		update_comment_count(<%= @commentable.comments.count %>)
+	<% end %>
+	
+	$(".loading-comment").hide()
+	$(".post-comment").show()
+	
+<% else %>
+
+	<% if @comment.content.blank? %>
+		$("#empty-comment-error-<%= @commentable.id %>").slideDown("fast")
+	<% else %>
+		$("#suggestion-comments-<%= @commentable.id %>").append(
+				"<%= escape_javascript(render @comment, commentable: @commentable) %>")
+		$("#empty-comment-error-<%= @commentable.id %>").hide()
+		$("#<%= dom_id @commentable %> textarea").val("")
+		$("#<%= dom_id @comment %>").effect('highlight', {color: '#FCF8E3'}, 2000)
+		
+		$("#comments-count-<%= @commentable.id %>").text("<%= pluralize(@count, 'Comment') %>")
+	<% end %>
+	
+	$("#loading-comment-<%= @commentable.id %>").hide()
+	$("#post-comment-<%= @commentable.id %>").show()
+
+<% end %>
+
+function update_comment_count(count) {
+	if (count == 1)
+		$("#comment-count").text("1 Comment")
+	else
+		$("#comment-count").text(count + " Comments")
+}

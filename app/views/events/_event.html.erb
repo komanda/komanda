@@ -1,0 +1,26 @@
+<article class="span3 event-thumb">
+	<%= link_to (image_tag event.flyer), event, class: "flyer" %>
+	
+	<footer class="visible-desktop">
+		<%= link_to "#{event}#comments" do %>
+			<small class><i class="icon-comment"></i> <%= event.comments.count %></small>
+		<% end %>
+		
+		<%= link_to "#{pictures_event_path(event)}" do %>
+			<small><i class="icon-picture"></i> <%= event.pictures.count %></small>
+		<% end %>
+		
+	</footer>
+</article>
+
+<div class="visible-phone">
+	<%= link_to event, class: "btn btn-mini" do %>
+		<span class="muted"><i class="icon-star"></i> Rate</span>
+	<% end %>
+	
+	<%= link_to "#{event}#comments", class: "btn btn-mini" do %>
+		<span class="muted"><i class="icon-comment"></i> Comment</span>
+	<% end %>
+	
+	<div class="separator"></div>
+</div>

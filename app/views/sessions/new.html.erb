@@ -1,0 +1,53 @@
+<article class="signin hidden-phone">
+	<header>
+		<h2>
+			Welcome to <span class="logo"><%= image_tag "star.png", size: "40x40" %> komanda</span>
+		</h2>
+	</header>
+
+	<div class="row">
+		<div class="offset3 span6 default">
+			<p class="lead muted">
+				Signin with:
+			</p>
+			<%= link_to "/auth/twitter", class: "btn btn-info" do %>
+				<i class="icon-twitter"></i> Twitter
+			<% end %>
+		
+			<%= link_to "auth/facebook", class: "btn btn-primary" do %>
+				<i class="icon-facebook"></i> Facebook
+			<% end %>
+		
+			<%= link_to "auth/google_oauth2", class: "btn btn-danger" do %>
+				<i class="icon-google-plus"></i> Google
+			<% end %>
+		</div>
+	</div>
+</article>
+
+<article class="signin visible-phone">
+	<header>
+		<h4>
+			Welcome to <span class="logo"><%= image_tag "star.png", size: "40x40" %> komanda</span>
+		</h4>
+	</header>
+
+	<div class="row">
+		<div class="offset3 span6 default">
+			<p class="lead muted">
+				Signin with:
+			</p>
+			<%= link_to "/auth/twitter", class: "btn btn-info btn-mini" do %>
+				<i class="icon-twitter"></i> Twitter
+			<% end %>
+		
+			<%= link_to "auth/facebook", class: "btn btn-primary btn-mini" do %>
+				<i class="icon-facebook"></i> Facebook
+			<% end %>
+					
+			<%= link_to "auth/google_oauth2", class: "btn btn-danger btn-mini" do %>
+				<i class="icon-google-plus"></i> Google
+			<% end %>
+		</div>
+	</div>
+</article>

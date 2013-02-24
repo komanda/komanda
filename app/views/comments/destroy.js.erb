@@ -1,0 +1,7 @@
+$("#<%= dom_id @comment %>").slideUp(function(){ $(this).remove();});
+
+<% if @commentable.class.to_s == "Event" %>
+	$("#comment-count").text("<%= pluralize(@count, 'Comment') %>")
+<% else %>
+	$("#comments-count-<%= @commentable.id %>").text("<%= pluralize(@count, 'Comment') %>")
+<% end %>

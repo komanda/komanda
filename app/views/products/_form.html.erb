@@ -1,0 +1,36 @@
+<%= form_for @product, html: { class: "form-horizontal" } do |f| %>
+	
+	<% if @product.errors.any? %>
+		<div class="alert alert-error">
+			<% @product.errors.full_messages.each do |error| %>
+				<p><%= error %></p>
+			<% end %>
+		</div>
+	<% end %>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :name, "Name*" %></div>
+		<div class="controls">
+			<%= f.text_field :name, class: "input-xlarge" %>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :price, "Price*" %></div>
+		<div class="controls">
+			<%= f.text_field :price, class: "input-mini" %>
+		</div>
+	</div>
+	
+	<div class="control-group">
+		<div class="control-label"><%= f.label :pictures, "Pictures*" %></div>
+		<div class="controls">
+			<%= f.text_area :pictures, rows: 3, value: @product.pictures.join(" ") %>
+		</div>
+	</div>
+	
+	<div class="controls">
+		<%= f.submit "Add", class: "btn btn-primary" %>
+		<%= link_to "Cancel", products_path, class: "btn" %>
+	</div>
+<% end %>

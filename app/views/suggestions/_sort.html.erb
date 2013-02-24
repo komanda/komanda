@@ -1,0 +1,20 @@
+<% if @suggestions.count > 3 %>
+	<div class="dropdown" id="_sort">
+	  <%= link_to "#", class: "dropdown-toggle" do %>
+			Sort (<span id="sort">recent</span>)<span class="caret"></span>
+		<% end %>
+	
+	  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+	    <li>
+	    	<%= link_to suggestions_path, id: "recent", remote: true do %>
+					<i class="icon-check"></i>Recent
+				<% end %>
+	    </li>
+			<li>
+				<%= link_to popular_suggestions_path, id: "popular", remote: true do %>
+					<i class="icon-check-empty"></i>Popular
+				<% end %>
+			</li>
+	  </ul>
+	</div>
+<% end %>

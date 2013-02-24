@@ -1,0 +1,60 @@
+$base-color: 	#ED1C24
+$grayscale:		grayscale($base-color)
+$invert:			invert($base-color)
+$complement:	complement($base-color)
+
+=border-radius($radius)
+	-webkit-border-radius:	$radius
+	-moz-border-radius:			$radius
+	-ms-border-radius:			$radius
+	-o-border-radius:				$radius
+	border-raidus:					$radius
+	
+=box-sizing
+	-webkit-box-sizing: border-box
+	-moz-box-sizing: 		border-box
+	-ms-box-sizing: 		border-box
+	-o-box-sizing:			border-box
+	box-sizing: 				border-box
+	
+=transition($time)
+	-webkit-transition:	all $time ease-in-out
+	-moz-transition: 		all $time ease-in-out
+	-ms-transition:			all $time ease-in-out
+	-o-transition: 			all $time ease-in-out
+	transition: 				all $time ease-in-out
+
+=transform-scale($val)
+	-webkit-transform:	scale($val)
+	-moz-transform: 		scale($val)
+	-ms-transform: 			scale($val)
+	-o-transform: 			scale($val)
+	transform: 					scale($val)
+
+=box-shadow
+	-webkit-box-shadow:	0 0 5px rgba(0, 0, 0, .35)
+	-moz-box-shadow: 		0 0 5px rgba(0, 0, 0, .35)
+	-ms-box-shadow: 		0 0 5px rgba(0, 0, 0, .35)
+	-o-box-shadow: 			0 0 5px rgba(0, 0, 0, .35)
+	box-shadow: 				0 0 5px rgba(0, 0, 0, .35)
+
+=box-shadow-inset
+	-webkit-box-shadow:	inset 2px 2px 9px gray
+	-moz-box-shadow: 		inset 2px 2px 9px gray
+	-ms-box-shadow: 		inset 2px 2px 9px gray
+	-o-box-shadow: 			inset 2px 2px 9px gray
+	box-shadow: 				inset 2px 2px 9px gray
+
+=text-shadow
+	-webkit-text-shadow:	0px 1px 0px white
+	-moz-text-shadow:			0px 1px 0px white
+	-ms-text-shadow:			0px 1px 0px white
+	-o-text-shadow:				0px 1px 0px white
+	text-shadow:					0px 1px 0px white
+
+=text-shadow-params($params)
+	-webkit-text-shadow:	$params
+	-moz-text-shadow:			$params
+	-ms-text-shadow:			$params
+	-o-text-shadow:				$params
+	text-shadow:					$params
