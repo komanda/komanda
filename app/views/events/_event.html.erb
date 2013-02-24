@@ -2,7 +2,7 @@
 	<%= link_to (image_tag event.flyer), event, class: "flyer" %>
 	
 	<footer class="visible-desktop">
-		<%= link_to "#{event}#comments" do %>
+		<%= link_to "#{event_path(event)}#comments" do %>
 			<small class><i class="icon-comment"></i> <%= event.comments.count %></small>
 		<% end %>
 		
@@ -18,7 +18,7 @@
 		<span class="muted"><i class="icon-star"></i> Rate</span>
 	<% end %>
 	
-	<%= link_to "#{event}#comments", class: "btn btn-mini" do %>
+	<%= link_to "#{event_path(event)}#comments", class: "btn btn-mini" do %>
 		<span class="muted"><i class="icon-comment"></i> Comment</span>
 	<% end %>
 	
