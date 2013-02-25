@@ -1,7 +1,9 @@
 $(document).ready ->
-	add_click_effect()
+	add_mouseover_effect()
 
-add_click_effect = () ->
+add_mouseover_effect = () ->
+	$(".thumb").click (event) ->
+		event.preventDefault()
 	$(".thumb").mouseover (event) ->
 		$(this).parent().prev().attr("src", $(this).attr("src"))
 		remove_selected($(this).parent())

@@ -20,6 +20,7 @@ class Event
   field :pictures,    type: Array, default: []
   field :ratings,     type: Hash, default: {}
   field :tickets,     type: Hash, default: {}
+  field :winner,      type: String
   field :_id,         type: String, default: ->{ name }
   
   index({ id: 1})
@@ -56,5 +57,14 @@ class Event
       total += v
     end
     total
+  end
+  
+  def ruffle
+    unless winner
+      self.winner = users[Random.rand(users.count)].id
+      self.save
+    end
+    
+    User.find(winner)
   end
 end

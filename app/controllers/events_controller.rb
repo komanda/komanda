@@ -23,8 +23,9 @@ class EventsController < ApplicationController
   end
   
   def show
-    count = @event.users.count
+    @winner = @event.ruffle if @event.date <= Date.current() && @event.date.year > 2012
     
+    count = @event.users.count
     if count > 8
       @going = @event.users.skip(count - 8)
     else

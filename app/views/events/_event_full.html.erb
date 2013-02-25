@@ -13,7 +13,14 @@
 	</div>
 </h2>
 
-<div class="separator"></div>
+<% if @winner %>
+	<div class="well well-large center" style="color:orange;font-size:18px">
+		Congratulations, 
+		<%= link_to @winner.profile_url, target: "_blank" do %>
+		 	<%= @winner.name %>
+		<% end %>, you have won a free ticket!
+	</div>
+<% end %>
 
 <table>
 	<tr>
