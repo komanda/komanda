@@ -6,5 +6,5 @@ class Product
   field :pictures, type: Array, default: []
   field :num_sold, default: 0
   
-  validates_presence_of :name, :price, :pictures
+  validates_presence_of :name, :price
 end

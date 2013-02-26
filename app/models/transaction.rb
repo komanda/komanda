@@ -2,7 +2,6 @@ class Transaction
   include Mongoid::Document
   include Mongoid::Timestamps
   
-  field :event_id
   field :action
   field :amount, type: Integer
   field :success, type: Boolean

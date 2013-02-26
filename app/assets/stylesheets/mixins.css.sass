@@ -31,6 +31,13 @@ $complement:	complement($base-color)
 	-o-transform: 			scale($val)
 	transform: 					scale($val)
 
+=box-shadow-params($params)
+	-webkit-box-shadow:	$params
+	-moz-box-shadow: 		$params
+	-ms-box-shadow: 		$params
+	-o-box-shadow: 			$params
+	box-shadow: 				$params
+	
 =box-shadow
 	-webkit-box-shadow:	0 0 5px rgba(0, 0, 0, .35)
 	-moz-box-shadow: 		0 0 5px rgba(0, 0, 0, .35)

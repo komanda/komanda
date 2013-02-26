@@ -14,8 +14,9 @@ class User
   has_many :comments, dependent: :destroy
   has_many :suggestions, dependent: :destroy
   has_many :shares, dependent: :destroy
-  has_many :orders, dependent: :destroy
+  # has_many :orders, dependent: :destroy
   has_and_belongs_to_many :events
+  has_many :carts
   attr_accessible :provider, :uid, :email, :name, :image_url, :profile_url
   validates_presence_of :provider, :uid
   
@@ -41,5 +42,17 @@ class User
   def update_email(email)
     self.email = email
     self.save
+  end
+  
+  def cart
+    if carts.count > 0 && carts.last.purchased_at.nil?
+      carts.last
+    else
+      carts.create()
+    end
+  end
+    
+  def show_cart
+    carts.count > 0 && carts.last.purchased_at.nil? && carts.last.line_items.count > 0
   end
 end

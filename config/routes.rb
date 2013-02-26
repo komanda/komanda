@@ -1,5 +1,7 @@
 Komanda::Application.routes.draw do
 
+  get "line_items/index"
+
   root :to => 'events#index'
   
   resources :events do
@@ -16,12 +18,8 @@ Komanda::Application.routes.draw do
     resources :comments
   end
   
-  resources :shares
-  
-  resources :orders
-  
-  resources :products
-  
+  resources :shares, :orders, :carts, :products, :line_items
+    
   match '/k-stuff' => 'products#index', as: :kstuff
   match '/k-stuff/new' => 'products#new'
   match '/contact' => 'static_pages#contact', as: :contact

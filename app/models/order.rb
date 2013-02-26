@@ -2,10 +2,10 @@ class Order
   include Mongoid::Document
   include Mongoid::MultiParameterAttributes
   
-  field :type
-  field :price, type: Float
-  field :quantity, type: Integer, default: 1
-  field :size
+  # field :type
+  # field :price, type: Float
+  # field :quantity, type: Integer, default: 1
+  # field :size
   field :card_brand
   field :card_expires_on, type: Date
   field :ip_address
@@ -17,9 +17,7 @@ class Order
   field :state
   field :zip
   
-  
-  
-  belongs_to :user
+  belongs_to :cart
   has_many :transactions, dependent: :destroy
   
   attr_accessor :card_number, :card_verification
@@ -28,12 +26,13 @@ class Order
   validates_presence_of :address, :city, :state, :zip
   
   def price_in_cents
-    (self.price * self.quantity * 100).round
+    (cart.total * 100).round
   end
   
   def purchase
     response = GATEWAY.purchase(price_in_cents, credit_card, ip: self.ip_address)
     self.transactions.create!(action: "purchase", amount: price_in_cents, response: response)
+    cart.update_attribute(:purchased_at, Time.now) if response.success?
     response.success?
   end
   

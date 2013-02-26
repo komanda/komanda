@@ -21,6 +21,17 @@
 						<%= link_to "K-stuff", kstuff_path %></li>
         </ul>
 				<ul class="nav pull-right">
+					<% if current_user %>
+						<li id="navbar-cart" class="<%= 'hide' unless current_user.show_cart %>">
+							<%= link_to cart_path(current_user.cart) do %>
+								<i class='icon-shopping-cart icon-large'></i>: 
+								<span id="navbar-item-count" style="color:orange">
+									<%= pluralize(current_user.cart.line_items.count, 'Item') %>
+								</span>
+							<% end %>
+						</li>
+					<% end %>
+					
 					<li>
 						<% if current_user %>
 							<%= link_to current_user.profile_url, target: "_blank" do %>
@@ -36,3 +47,5 @@
     </div>
   </div>
 </nav>
+
+<%= render 'carts/cart' %>

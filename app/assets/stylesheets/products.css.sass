@@ -6,7 +6,7 @@
 	overflow: hidden
 	position: relative
 	margin-bottom: 20px
-	padding-bottom: 0
+	#padding-bottom: 0
 	.admin
 		position: absolute
 		right: 10px
@@ -15,9 +15,6 @@
 			+text-shadow-params(0 1px 2px black)
 			color: white
 			margin-left: 5px
-	&:hover
-		.admin
-			display: block
 	.main-picture
 		margin: -10px
 		margin-bottom: 0
@@ -35,3 +32,16 @@
 			border-color: rgba($base-color, 0.5)
 	.price
 		color: orange
+	.controlls
+		input
+			width: 25px
+			height: 17px
+			margin-right: 10px
+		select
+			width: 55px
+			height: 25px
+	.add-to-cart
+		width: 40px
+	&:hover
+		.admin
+			display: block
