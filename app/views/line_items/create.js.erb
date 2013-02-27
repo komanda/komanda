@@ -1,0 +1,12 @@
+$("#navbar-item-count").text("<%= pluralize(current_user.cart.line_items.count, 'Item') %>")
+$("#item-count").text("<%= pluralize(current_user.cart.line_items.count, 'Item') %>")
+$("#cart").show("slide", { direction: "right" }, 500)
+$("#navbar-cart").show()
+$("#<%= dom_id @product %>").hover(function() {
+	$(this).find(".add-to-cart").addClass("btn-success")
+})
+$("#<%= dom_id @product %>").find(".add-to-cart").html("Added").toggleClass("disabled").attr("href", "#")
+
+setTimeout(function() {
+	$("#cart").hide("slide", { direction: "right"}, 500)
+}, 4000)

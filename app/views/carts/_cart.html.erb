@@ -1,0 +1,30 @@
+<table class="table">
+	<tr>
+		<th>Item</th><th>Details</th><th>Cost</th>
+	</tr>
+
+	<%= render cart.line_items %>
+	
+	<tr>
+		<td colspan="2" class="muted" style="text-align:right;">Subtotal:</td>
+		<td>
+			<span id="subtotal"><%= number_to_currency cart.subtotal %></span>
+		</td>
+	</tr>
+	
+	<tr>
+		<td colspan="2" class="muted" style="text-align:right;border:0">Tax:</td>
+		<td style="border:0">
+			<span id="tax"><%= number_to_currency cart.tax %></span>
+		</td>
+	</tr>
+	
+	<tr>
+		<td style="border:0"></td>
+		<td class="muted" style="text-align:right;"><p class="lead">Total:</p></td>
+		<td>
+			<p class="lead" style="color:orange">
+				<span id="total"><%= number_to_currency cart.total %></span>
+			</p></td>
+	</tr>
+</table>

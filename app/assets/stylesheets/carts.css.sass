@@ -1,0 +1,31 @@
+@import 'mixins'
+
+.cart
+	-webkit-transition:	background 0.2s ease-in-out
+	-moz-transition: 		background 0.2s ease-in-out
+	-ms-transition:			background 0.2s ease-in-out
+	-o-transition: 			background 0.2s ease-in-out
+	transition: 				background 0.2s ease-in-out
+	+box-shadow-params(0 0 10px black)
+	+border-radius(3px)	
+	+text-shadow-params(0 1px 1px gray)
+	padding: 15px
+	margin: 15px
+	background-color: rgba(orange, 0.6)
+	color: whitesmoke
+	position: fixed
+	right: 15px
+	bottom: 0
+	z-index: 10
+	&:hover
+		background-color: rgba(orange, 1)
+.line-item
+	.name
+		vertical-align: top
+		font-size: 20px
+		margin-left: 10px
+	&:hover
+		.close
+			display: inline
+.cost
+	color: orange

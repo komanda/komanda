@@ -1,0 +1,8 @@
+<% if current_user %>
+	<%= link_to cart_path(current_user.cart) do %>
+		<article id="cart" class="cart hide">
+			<i class="icon-shopping-cart icon-large"></i>: 
+			<span id="item-count"></span>
+		</article>
+	<% end %>
+<% end %>

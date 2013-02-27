@@ -1,0 +1,34 @@
+<tr id="<%= dom_id line_item %>" class="line-item">	
+	<td>
+		<%= image_tag line_item.product.pictures.first, size: "60x60" %>
+		<span class="name"><%= line_item.product.name %></span>
+	</td>
+	
+	<td>
+		<p>
+			<small class="muted">Qty:  </small><%= line_item.quantity %>
+		</p>
+		
+		<p>
+			<% if line_item.size %>
+				<small class="muted">Size:  </small><%= line_item.size %>
+			<% end %>
+		</p>
+		
+		<p>
+			<small class="muted">Unit price:  </small><%= number_to_currency line_item.product.price %>
+		</p>
+	</td>
+	
+	<td>
+		<%= link_to "×", line_item_path(line_item), 
+			"rel" => "tooltip",
+			"title" => "Remove item",
+			class: "close hide", 
+			method: :delete, remote: true %>
+		
+		<p class="lead">
+			<%= number_to_currency(line_item.full_price) %>
+		</p>
+	</td>
+</tr>

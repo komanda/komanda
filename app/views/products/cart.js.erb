@@ -1,0 +1,7 @@
+$("#navbar-item-count").text("<%= pluralize(@cart.line_items.count, 'Item') %>")
+$("#item-count").text("<%= pluralize(@cart.line_items.count, 'Item') %>")
+$("#cart").show("slide", { direction: "right" }, 500)
+
+setTimeout(function() {
+	$("#cart").hide("slide", { direction: "right"}, 500)
+}, 3000)

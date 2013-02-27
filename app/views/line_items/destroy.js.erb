@@ -1,0 +1,11 @@
+<% if current_user.cart.line_items.count == 0 %>
+	self.location="<%= kstuff_url %>"
+<% else %>
+	$("#<%= dom_id @line_item %>").hide('slow', function() { 
+		$(this).remove()
+		$("#subtotal").text("<%= number_to_currency current_user.cart.subtotal %>")
+		$("#tax").text("<%= number_to_currency current_user.cart.tax %>")
+		$("#total").text("<%= number_to_currency current_user.cart.total %>")
+		$("#navbar-item-count").text("<%= pluralize(current_user.cart.line_items.count, 'Item') %>")
+	})
+<% end %>
