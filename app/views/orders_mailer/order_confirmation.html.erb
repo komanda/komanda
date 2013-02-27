@@ -1,156 +1,61 @@
-<style>
-	.row {
-	  margin-left: -20px;
-	  *zoom: 1;
-	}
-	.row:before,
-	.row:after {
-	  display: table;
-	  content: "";
-	  line-height: 0;
-	}
-	.row:after {
-	  clear: both;
-	}
-	@media (min-width: 768px) and (max-width: 979px) {
-	  .row {
-	    margin-left: -20px;
-	    *zoom: 1;
-	  }
-	  .row:before,
-	  .row:after {
-	    display: table;
-	    content: "";
-	    line-height: 0;
-	  }
-	  .row:after {
-	    clear: both;
-	  }
-		.span3 {
-	    width: 166px;
-	  }
-	}
-	@media (min-width: 1200px) {
-	  .row {
-	    margin-left: -30px;
-	    *zoom: 1;
-	  }
-	  .row:before,
-	  .row:after {
-	    display: table;
-	    content: "";
-	    line-height: 0;
-	  }
-	  .row:after {
-	    clear: both;
-	  }
-		.span3 {
-	    width: 270px;
-	  }
-	}
-	.span3 {
-	  width: 220px;
-	}
-	
-	.table {
-	  width: 100%;
-	  margin-bottom: 20px;
-	}
-	.table th,
-	.table td {
-	  padding: 8px;
-	  line-height: 20px;
-	  text-align: left;
-	  vertical-align: top;
-	  border-top: 1px solid #dddddd;
-	}
-	.table th {
-	  font-weight: bold;
-	}
-	
-</style>
+<% cart = @user.carts.where(:purchased_at.lte => Time.now).last %>
 
-<div class="row" style="margin:0 auto;width:60%">
+<table style="font-size:17px;margin-bottom:15px">
+	<tr>
+		<td style="text-align:right;color:gray">Order ID:</td>
+		<td><%= cart.order.id %></td>
+	</tr>
 	
-	<div class="span3" style="float:right;width:30%">
-		<% if @event %>
-			<%= image_tag @event.flyer, size: "200x200" %>
-		<% else %>
-			<%= image_tag @product.pictures.first, size: "200x200" %>
-		<% end %>
-	</div>
-	
-	<div class="span3" style="float:left;width:60%;margin-right:10%">
-		<h3>Order Summary</h3>
-		
-		<table class="table" style="text-align:left;">
-			
-			<tr>
-				<th>Quantity</th>
-				<td><%= @order.quantity %></td>
-			</tr>
-			
-			<% if @product %>
-				<tr>
-					<th>Size</th>
-					<td><%= @order.size %></td>
-				</tr>
-			<% end %>
-			
-			<tr>
-				<th>Total</th>
-				<td><%= number_to_currency @order.price * @order.quantity %></td>
-			</tr>
-			
-			<tr>
-				<th>Order ID</th>
-				<td><%= @order.id %></td>
-			</tr>
-			
-			<tr>
-				<th>Transaction ID</th>
-				<td><%= @order.transactions.last.id %></td>
-			</tr>
-			
-		</table>
-		
-		
-		<% if @event %>
-			<h3>Billing Address</h3>
-		<% else %>
-			<h3>Shipping Address</h3>
-		<% end %>
-		
-		<table class="table" style="text-align:left;">
-			
-			<tr>
-				<th>To</th>
-				<td><%= @user.name %></td>
-			</tr>
-			
-			<tr>
-				<th>Address</th>
-				<td><%= @order.address %></td>
-			</tr>
-			
-			<tr>
-				<th>City</th>
-				<td><%= @order.city %></td>
-			</tr>
-			
-			<tr>
-				<th>State</th>
-				<td><%= @order.state %></td>
-			</tr>
-			
-			<tr>
-				<th>Zip Code</th>
-				<td><%= @order.zip %></td>
-			</tr>
-			
-		</table>
-	</div>
-	
-	
-</div>
+	<tr>
+		<td style="text-align:right;color:gray">Transaction ID:</td>
+		<td><%= cart.order.transactions.last.id %></td>
+	</tr>
+</table>
 
+<table style="border-collapse:collapse">
+	<tr style="text-align:left">
+		<th style="border-top: 1px solid gray">Item</th>
+		<th style="border-top: 1px solid gray">Details</th>
+		<th style="border-top: 1px solid gray">Cost</th>
+	</tr>
+	
+	<% cart.line_items.each do |item| %>
+		
+		<tr style="vertical-align:top">
+			<td style="border-top: 1px solid gray;padding:10px 50px 10px 10px">
+				<%= image_tag item.product.pictures.first, size: "60x60" %>
+				<%= item.product.name %>
+			</td>
+			<td style="border-top: 1px solid gray;padding:10px 50px 10px 10px">
+				qty: <%= item.quantity %><br/>
+				<% if item.size %>
+					size: <%= item.size %><br/>
+				<% end %>
+				price: <%= number_to_currency item.product.price %>
+			</td>
+			<td style="border-top: 1px solid gray;padding:10px 50px 10px 10px">
+				<%= number_to_currency item.full_price %>
+			</td>
+		</tr>
+		
+	<% end %>
+	
+	<tr>
+		<td style="border-top: 1px solid gray;"></td>
+		<td style="text-align:right;color:gray;border-top: 1px solid gray;">Subtotal:</td>
+		<td style="border-top: 1px solid gray;"><%= number_to_currency cart.subtotal %></td>
+	</tr>
+	
+	<tr>
+		<td></td>
+		<td style="text-align:right;color:gray;">Tax:</td>
+		<td><%= number_to_currency cart.tax %></td>
+	</tr>
+
+	<tr style="font-size:17px">
+		<td style="border-top: 1px solid gray;"></td>
+		<td style="text-align:right;color:gray;border-top: 1px solid gray;">Total:</td>
+		<td style="border-top: 1px solid gray;color:orange"><%= number_to_currency cart.total %></td>
+	</tr>
+	
+</table>

@@ -18,4 +18,8 @@ class SessionsController < ApplicationController
     session[:user_id] = nil    
     redirect_back
   end
+  
+  def send_email
+    OrdersMailer.order_confirmation(current_user).deliver
+  end
 end

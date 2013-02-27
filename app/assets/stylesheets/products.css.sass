@@ -32,16 +32,25 @@
 			border-color: rgba($base-color, 0.5)
 	.price
 		color: orange
-	.controlls
-		input
-			width: 25px
-			height: 17px
-			margin-right: 10px
-		select
-			width: 55px
-			height: 25px
+	.controls
+		+transition(0.2s)
+		position: absolute
+		left: 0
+		bottom: -100px
+		width: 95%
+		background-color: white
+		padding: 10px
+	.qty
+		width: 25px
+		height: 16px
+		margin-right: 10px
+	.size
+		width: 55px
+		height: 25px
 	.add-to-cart
 		width: 40px
 	&:hover
 		.admin
 			display: block
+		.controls
+			bottom: 0

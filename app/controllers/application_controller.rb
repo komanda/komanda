@@ -31,8 +31,10 @@ class ApplicationController < ActionController::Base
           return current_user.shares.include?(object) || current_user.admin
         elsif object.class.to_s == "Suggestion"
           return current_user.suggestions.include?(object) || current_user.admin
-        else
+        elsif object.class.to_s == "Comment"
           return current_user.comments.include?(object) || current_user.admin
+        elsif object.class.to_s == "LineItem"
+          return current_user.cart.line_items.include?(object)
         end
       else
         false

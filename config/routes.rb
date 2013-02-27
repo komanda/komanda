@@ -28,4 +28,5 @@ Komanda::Application.routes.draw do
   match '/auth/failure' => 'parties#index'
   match '/signin' => 'sessions#new', as: :signin
   match '/signout' => 'sessions#destroy', as: :signout
+  match '/sendemail' => 'sessions#send_email', as: :sendemail
 end

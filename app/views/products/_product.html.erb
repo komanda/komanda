@@ -1,11 +1,7 @@
 <article id="<%= dom_id product %>" class="span4 default product">
 	
 	<% if admin_user? %>
-		<div class="admin">
-			<%= link_to "#{new_order_path}?product_id=#{product.id}" do %>
-				<i class="icon-shopping-cart"></i>
-			<% end %>
-			
+		<div class="admin hidden-phon hidden-tablet">	
 			<%= link_to edit_product_path(product) do %>
 				<i class="icon-edit"></i>
 			<% end %>
@@ -33,20 +29,41 @@
 		<span class="price pull-right">$<%= product.price %></span>
 	</p>
 	
-	<div class="controlls">
-		Qty: <%= number_field_tag "qty", 1, in: 1...10 %>
+	<div class="controls visible-desktop">
+		<small>
+		Qty: <%= number_field_tag "qty", 1, in: 1...10, class: "qty" %>
 		Size: <%= select_tag 'size', 
-			"<option>S</option><option selected='selected'>M</option><option>L</option>".html_safe %>
+			"<option>S</option><option selected='selected'>M</option><option>L</option>".html_safe, class: "size" %>
+		</small>
 		
-		<% link_to "Add to cart", line_items_path(product_id: product), method: :post, 
-			class: "btn btn-success add-to-cart", remote: true %>
-		
-		<%= link_to line_items_path(product_id: product), method: :post, 
-				class: "btn btn-small pull-right add-to-cart", remote: true do %>
+		<% if current_user %>
+			<%= link_to line_items_path(product_id: product, qty: 1, size: "M"), method: :post, 
+					class: "btn btn-small btn-success pull-right add-to-cart", remote: true do %>
+					<i class="icon-white icon-shopping-cart"></i> Add
+			<% end %>
+		<% else %>
+			<%= link_to signin_path, class: "btn btn-small btn-success pull-right add-to-cart" do %>
 				<i class="icon-white icon-shopping-cart"></i> Add
+			<% end %>
 		<% end %>
-		
-
 	</div>
 	
+	<div class="hidden-desktop">
+		<small>
+		Qty: <%= number_field_tag "qty", 1, in: 1...10, class: "qty test" %>
+		Size: <%= select_tag 'size', 
+			"<option>S</option><option selected='selected'>M</option><option>L</option>".html_safe, class: "size" %>
+		</small>
+
+		<% if current_user %>
+			<%= link_to line_items_path(product_id: product, qty: 1, size: "M"), method: :post, 
+					class: "btn btn-small btn-success pull-right add-to-cart", remote: true do %>
+					<i class="icon-white icon-shopping-cart"></i> Add
+			<% end %>
+		<% else %>
+			<%= link_to signin_path, class: "btn btn-small btn-success pull-right add-to-cart" do %>
+				<i class="icon-white icon-shopping-cart"></i> Add
+			<% end %>
+		<% end %>
+	</div>
 </article>

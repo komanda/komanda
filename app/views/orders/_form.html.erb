@@ -11,76 +11,9 @@
 			<% end %>
 		</div>
 	<% end %>
-
-	<% if @event %>
-		<h3><%= @event.name %></h3>
-		
-		<div class="row">
-			<%= image_tag @event.flyer, class: "span3" %>
-			<div class="span3">
-				
-				<table class="table">
-					<tr>
-						<th class="span2">Quantity</th>
-						<td><%= f.select :quantity, [1,2,3,4,5,6] %></td>
-					</tr>
-
-					<tr>
-						<th>Price</th>
-						<td id="price" price="<%= session[:price] %>">
-							<%= number_to_currency session[:price].to_i %>
-						</td>
-					</tr>
-					<tr class="info">
-						<th>Total</th>
-						<td id="total"><%= number_to_currency session[:price].to_i * @order.quantity %></td>
-					</tr>
-				</table>
-
-			</div>
-		</div>
-	<% elsif @product %>
-		<h3><%= @product.name %></h3>
-		
-		<div class="row">
-			<%= image_tag @product.pictures.first, class: "span3" %>
-			<div class="span3">
-				
-				<table class="table">
-					<tr>
-						<th class="span2">Quantity</th>
-						<td><%= f.select :quantity, [1,2,3,4,5,6] %></td>
-					</tr>
-
-					<tr>
-						<th>Size</th>
-						<td><%= f.select :size, ["S", "M", "L"] %></td>
-					</tr>
-
-					<tr>
-						<th>Price</th>
-						<td id="price" price="<%= session[:price] %>">
-							<%= number_to_currency session[:price].to_i %>
-						</td>
-					</tr>
-					<tr class="info">
-						<th>Total</th>
-						<td id="total"><%= number_to_currency session[:price].to_i * @order.quantity %></td>
-					</tr>
-				</table>
-					
-			</div>
-		</div>
-	<% end %>
-	
-	<br/>
 	
 	<p class="lead muted" style="text-align:center">
-		<% if @event %>
-			Billing Address
-		<% else %>
-			Shipping Address
-		<% end %>
+		Billing/Shipping Address
 	</p>
 	
 	<div class="control-group">

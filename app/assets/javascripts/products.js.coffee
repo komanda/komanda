@@ -1,9 +1,9 @@
 $(document).ready ->
-	add_mouseover_effect()
+	add_mouseover_effect_on_pictures()
 	add_loading_effect()
-	change_hover_effect()
+	add_size_and_qty_listeners()
 
-add_mouseover_effect = () ->
+add_mouseover_effect_on_pictures = () ->
 	$(".thumb").mouseover (event) ->
 		$(this).parent().prev().attr("src", $(this).attr("src"))
 		remove_selected($(this).parent())
@@ -18,6 +18,16 @@ add_loading_effect = () ->
 	$(".add-to-cart").click (event) ->
 		$(this).html("<i class='icon-spinner icon-spin'></i>")
 
-change_hover_effect = () ->
-	$(".product").hover (event) ->
-		$(this).find(".add-to-cart").toggleClass("btn-success")
+add_size_and_qty_listeners = () ->
+	$(".product").find("#qty").change (event) ->
+		qty = $(this).val()
+		link = $(this).parent().parent().find(".add-to-cart")
+		url = link.attr("href")
+		url = url.replace(/qty=\d/, "qty=" + qty)
+		link.attr("href", url)
+	$(".product").find("#size").change (event) ->
+		size = $(this).val()
+		link2 = $(this).parent().parent().find(".add-to-cart")
+		url2 = link2.attr("href")
+		url2 = url2.replace(/size=[SML]/, "size=" + size)
+		link2.attr("href", url2)

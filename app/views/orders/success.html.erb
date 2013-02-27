@@ -1,13 +1,25 @@
 <div class="row">
-	<div class="offset2 span7">
+	<div class="offset2 span8">
 		<div class="order-form-container default">
-			<p class="alert alert-success">
-				<%= @order.first_name.titleize %>, thank you for purchasing 
-				<%= @event ? "your ticket" : @product.name %>.
-				Email confirmation has been sent to <strong><%= @order.email.upcase %></strong>. 
-				Please print this page for you record.
-			</p>
-			<%= render @order %>
+			<div class="alert alert-success">
+					Order placed. Email confirmation has been sent to <strong><%= @order.email.upcase %></strong>. 
+					Please print this page for you record.
+			</div>
+			
+			
+			<table class="summary">
+				<tr>
+					<td class="muted right">Order ID:</td>
+					<td><%= current_user.carts.last.order.id %></td>
+				</tr>
+				
+				<tr>
+					<td class="muted right">Transaction ID:</td>
+					<td><%= current_user.carts.last.order.transactions.last.id %></td>
+				</tr>
+			</table>
+			
+			<%= render current_user.carts.last %>
 		</div>
 	</div>
 </div>

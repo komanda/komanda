@@ -84,5 +84,5 @@ class EventsController < ApplicationController
   
   def going
     @going = @event.users
-  end
+  end  
 end
