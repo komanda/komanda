@@ -60,5 +60,14 @@ Komanda::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-
+  
+  # PayPal config
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+    ::GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(
+      login: "nikola_1356317801_biz_api1.gmail.com",
+      password: "1356317833",
+      signature: "A0MEZm8UcObMlW456P1ffZuEx1MEAGptLKuOr.rpk0cdOiAcsW87P9RV"
+    )
+  end
 end
