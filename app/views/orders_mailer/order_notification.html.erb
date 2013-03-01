@@ -24,10 +24,12 @@
 		<td><%= cart.order.id %></td>
 	</tr>
 	
-	<tr>
-		<td style="text-align:right;color:gray">Transaction ID:</td>
-		<td><%= cart.order.transactions.last.id %></td>
-	</tr>
+	<% if cart.order.transactions.count > 0 %>
+		<tr>
+			<td style="text-align:right;color:gray">Transaction ID:</td>
+			<td><%= cart.order.transactions.last.id %></td>
+		</tr>
+	<% end %>
 </table>
 
 <table style="border-collapse:collapse">

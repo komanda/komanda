@@ -13,10 +13,13 @@
 					<td><%= current_user.carts.last.order.id %></td>
 				</tr>
 				
-				<tr>
-					<td class="muted right">Transaction ID:</td>
-					<td><%= current_user.carts.last.order.transactions.last.id %></td>
-				</tr>
+				
+				<% if current_user.carts.last.order.transactions.count > 0 %>
+					<tr>
+						<td class="muted right">Transaction ID:</td>
+						<td><%= current_user.carts.last.order.transactions.last.id %></td>
+					</tr>
+				<% end %>
 			</table>
 			
 			<%= render current_user.carts.last %>
