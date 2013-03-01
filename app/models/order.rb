@@ -31,7 +31,7 @@ class Order
   
   def purchase(user)
     response = GATEWAY.purchase(price_in_cents, credit_card, ip: self.ip_address)
-    self.transactions.create!(action: "purchase", amount: price_in_cents, response: response)
+    self.transactions.create(action: "purchase", amount: price_in_cents, response: response)
     cart.update_attribute(:purchased_at, Time.now) if response.success?
     ticket_sold(user)
     response.success?

@@ -1,6 +1,10 @@
 class LineItemsController < ApplicationController
   before_filter :logged_in
-    
+  
+  def index
+    redirect_to kstuff_path
+  end
+  
   def create
     @product = Product.find(params[:product_id])
     @line_item = current_user.cart.line_items.new(
