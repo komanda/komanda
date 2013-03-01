@@ -2,6 +2,24 @@
 
 <table style="font-size:17px;margin-bottom:15px">
 	<tr>
+		<td style="text-align:right;color:gray">Name:</td>
+		<td><%= @user.name %></td>
+	</tr>
+	
+	<tr>
+		<td style="text-align:right;color:gray">Email:</td>
+		<td><%= @user.email %></td>
+	</tr>
+	
+	<tr style="vertical-align:top">
+		<td style="text-align:right;color:gray">Address:</td>
+		<td>
+			<%= cart.order.address %><br/>
+			<%= cart.order.city %>, <%= cart.order.state %> <%= cart.order.zip %>
+		</td>
+	</tr>
+	
+	<tr>
 		<td style="text-align:right;color:gray">Order ID:</td>
 		<td><%= cart.order.id %></td>
 	</tr>

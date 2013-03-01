@@ -29,10 +29,11 @@ class Order
     (cart.total * 100).round
   end
   
-  def purchase
+  def purchase(user)
     response = GATEWAY.purchase(price_in_cents, credit_card, ip: self.ip_address)
     self.transactions.create!(action: "purchase", amount: price_in_cents, response: response)
     cart.update_attribute(:purchased_at, Time.now) if response.success?
+    ticket_sold(user)
     response.success?
   end
   
@@ -56,5 +57,16 @@ class Order
         :first_name         => first_name,
         :last_name          => last_name
       )
+    end
+    
+    def ticket_sold(user)
+      cart.line_items.each do |item|
+        if item.product.name.scan("ticket").count > 0
+          name = item.product.name
+          event = Event.find("#{name.slice(0..name.length-8)}")
+          event.ticket_sold(item.quantity, user)
+          event.save
+        end
+      end
     end
 end

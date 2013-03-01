@@ -5,8 +5,8 @@ class Cart
   field :purchased_at
   
   belongs_to :user
-  has_one :order
-  has_many :line_items
+  has_one :order, dependent: :destroy
+  has_many :line_items, dependent: :destroy
   
   def subtotal
     line_items.to_a.sum(&:full_price)

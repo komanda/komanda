@@ -1,7 +1,5 @@
 class ProductsController < ApplicationController
-  before_filter :admin_user, except: [:index, :cart]
-  before_filter :logged_in, only: :cart
-  
+  before_filter :admin_user, except: :index
   
   def index
     @products = Product.all
@@ -36,12 +34,5 @@ class ProductsController < ApplicationController
   def destroy
     Product.find(params[:id]).destroy
     redirect_to kstuff_path, notice: "Product removed."
-  end
-  
-  # def cart
-  #   @product = Product.find(params[:id])
-  #   @line_item = current_user.add_to_cart(@product, params[:quantity], params[:size])
-  #   @cart = current_user.carts.last
-  # end
-  
+  end  
 end

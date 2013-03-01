@@ -7,10 +7,8 @@ class OrdersMailer < ActionMailer::Base
     mail(to: "#{user.name} <#{user.email}>", subject: "Komanda: Order Confirmaion")
   end
   
-  def notify(user, order, product)
+  def order_notification(user)
     @user = user
-    @order = order
-    @product = product
     
     mail(to: "komandalife@gmail.com", subject: "Komanda: NEW ORDER")
   end

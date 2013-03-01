@@ -40,6 +40,8 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(params[:event])
     @event.pictures = (params[:event][:pictures]).split
+    product = Product.create!(name: "#{@event.name} ticket", price: @event.price, pictures: ["#{@event.flyer}"])
+    @event.ticket = product.id
     
     if @event.save
       redirect_to @event

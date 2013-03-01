@@ -6,6 +6,7 @@ $(document).ready ->
 	add_links_to_pictures()
 	close_picture_modal_with_esc()
 	attach_left_right_keys()
+	update_tickets_link()
 	$("li[rel=tooltip]").tooltip()
 	
 datepicker = () ->
@@ -135,9 +136,10 @@ set_rating = () ->
 	for i in [(rating)..5]
 		$(links[i]).children().first().attr("src", "/assets/star_empty.png")
 
-			
-		
-		
-		
-
-	
+update_tickets_link = () ->
+	console.log("calling update-ling for events page")
+	$("#ticket-qty").change (event) ->
+		link = $(this).parent().prev()
+		url = link.attr("href")
+		url = url.replace(/qty=\d/, "qty=" + $(this).val())
+		link.attr("href", url)

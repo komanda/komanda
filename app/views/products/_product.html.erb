@@ -1,69 +1,71 @@
-<article id="<%= dom_id product %>" class="span4 default product">
-	
-	<% if admin_user? %>
-		<div class="admin hidden-phon hidden-tablet">	
-			<%= link_to edit_product_path(product) do %>
-				<i class="icon-edit"></i>
-			<% end %>
-		
-			<%= link_to product,
-			 	method: :delete, 
-				:data => { :confirm => 'Are you sure you want to delete this product?' } do %>
-				<i class="icon-remove"></i>
+<% unless product.name == "Ticket" %>
+	<article id="<%= dom_id product %>" class="span4 default product">
+
+		<% if admin_user? %>
+			<div class="admin hidden-phon hidden-tablet">	
+				<%= link_to edit_product_path(product) do %>
+					<i class="icon-edit"></i>
+				<% end %>
+
+				<%= link_to product,
+				 	method: :delete, 
+					:data => { :confirm => 'Are you sure you want to delete this product?' } do %>
+					<i class="icon-remove"></i>
+				<% end %>
+			</div>
+		<% end %>
+
+		<%= image_tag product.pictures.first, class: "main-picture", id: "main-picture-#{product.id}" %>
+
+		<div class="thumbs">
+			<% product.pictures.each do |picture| %>
+				<%= image_tag picture, size: "50x50", 
+					class: "thumb #{'selected' if  picture == product.pictures.first}" %>
 			<% end %>
 		</div>
-	<% end %>
 
-	<%= image_tag product.pictures.first, class: "main-picture", id: "main-picture-#{product.id}" %>
+		<p class="lead muted">
+			<%= product.name %>
 
-	<div class="thumbs">
-		<% product.pictures.each do |picture| %>
-			<%= image_tag picture, size: "50x50", 
-				class: "thumb #{'selected' if  picture == product.pictures.first}" %>
-		<% end %>
-	</div>
+			<span class="price pull-right">$<%= product.price %></span>
+		</p>
 
-	<p class="lead muted">
-		<%= product.name %>
+		<div class="controls visible-desktop">
+			<small>
+			Qty: <%= number_field_tag "qty", 1, in: 1...10, class: "qty" %>
+			Size: <%= select_tag 'size', 
+				"<option>S</option><option selected='selected'>M</option><option>L</option>".html_safe, class: "size" %>
+			</small>
 
-		<span class="price pull-right">$<%= product.price %></span>
-	</p>
-	
-	<div class="controls visible-desktop">
-		<small>
-		Qty: <%= number_field_tag "qty", 1, in: 1...10, class: "qty" %>
-		Size: <%= select_tag 'size', 
-			"<option>S</option><option selected='selected'>M</option><option>L</option>".html_safe, class: "size" %>
-		</small>
-		
-		<% if current_user %>
-			<%= link_to line_items_path(product_id: product, qty: 1, size: "M"), method: :post, 
-					class: "btn btn-small btn-success pull-right add-to-cart", remote: true do %>
+			<% if current_user %>
+				<%= link_to line_items_path(product_id: product, qty: 1, size: "M"), method: :post, 
+						class: "btn btn-small btn-success pull-right add-to-cart", remote: true do %>
+						<i class="icon-white icon-shopping-cart"></i> Add
+				<% end %>
+			<% else %>
+				<%= link_to signin_path, class: "btn btn-small btn-success pull-right add-to-cart" do %>
 					<i class="icon-white icon-shopping-cart"></i> Add
+				<% end %>
 			<% end %>
-		<% else %>
-			<%= link_to signin_path, class: "btn btn-small btn-success pull-right add-to-cart" do %>
-				<i class="icon-white icon-shopping-cart"></i> Add
-			<% end %>
-		<% end %>
-	</div>
-	
-	<div class="hidden-desktop">
-		<small>
-		Qty: <%= number_field_tag "qty", 1, in: 1...10, class: "qty test" %>
-		Size: <%= select_tag 'size', 
-			"<option>S</option><option selected='selected'>M</option><option>L</option>".html_safe, class: "size" %>
-		</small>
+		</div>
 
-		<% if current_user %>
-			<%= link_to line_items_path(product_id: product, qty: 1, size: "M"), method: :post, 
-					class: "btn btn-small btn-success pull-right add-to-cart", remote: true do %>
+		<div class="hidden-desktop">
+			<small>
+			Qty: <%= number_field_tag "qty", 1, in: 1...10, class: "qty test" %>
+			Size: <%= select_tag 'size', 
+				"<option>S</option><option selected='selected'>M</option><option>L</option>".html_safe, class: "size" %>
+			</small>
+
+			<% if current_user %>
+				<%= link_to line_items_path(product_id: product, qty: 1, size: "M"), method: :post, 
+						class: "btn btn-small btn-success pull-right add-to-cart", remote: true do %>
+						<i class="icon-white icon-shopping-cart"></i> Add
+				<% end %>
+			<% else %>
+				<%= link_to signin_path, class: "btn btn-small btn-success pull-right add-to-cart" do %>
 					<i class="icon-white icon-shopping-cart"></i> Add
+				<% end %>
 			<% end %>
-		<% else %>
-			<%= link_to signin_path, class: "btn btn-small btn-success pull-right add-to-cart" do %>
-				<i class="icon-white icon-shopping-cart"></i> Add
-			<% end %>
-		<% end %>
-	</div>
-</article>
+		</div>
+	</article>
+<% end %>

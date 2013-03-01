@@ -1,7 +1,4 @@
 Komanda::Application.routes.draw do
-
-  get "line_items/index"
-
   root :to => 'events#index'
   
   resources :events do

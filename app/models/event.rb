@@ -18,8 +18,9 @@ class Event
   field :price,       type: Float, default: 15.00
   field :views,       type: Integer, default: 0
   field :pictures,    type: Array, default: []
-  field :ratings,     type: Hash, default: {}
-  field :tickets,     type: Hash, default: {}
+  field :ratings,     type: Hash, default: Hash.new
+  field :tickets,     type: Hash, default: Hash.new
+  field :ticket,      type: String
   field :winner,      type: String
   field :_id,         type: String, default: ->{ name }
   
@@ -57,6 +58,17 @@ class Event
       total += v
     end
     total
+  end
+  
+  def ticket_sold(qty, user)
+    if tickets.key?(user.id)
+      self.tickets[user.id] += qty.to_i
+    else
+      self.tickets[user.id] = qty.to_i
+    end
+    
+    join(user, false)
+    save
   end
   
   def ruffle

@@ -6,8 +6,9 @@
 			<%= render @cart %>
 			
 			<div class="well right">
-				<%= link_to "Checkout", new_order_path, class: "btn btn-primary" %>
-				<%= link_to "Remove all", cart_path(@cart), class: "btn", method: :delete %>
+				<%= link_to "Checkout", new_order_path, class: "btn btn-small btn-primary" %>
+				<%= link_to "Remove all", cart_path(@cart), class: "btn btn-small", method: :delete %>
+				<%= link_to "Continue shopping", kstuff_path, class: "btn btn-small" %>
 			</div>
 		</article>
 	</div>	
