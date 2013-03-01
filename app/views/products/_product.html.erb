@@ -1,4 +1,4 @@
-<% unless product.name == "Ticket" %>
+<% unless product.name.scan("ticket").length > 0 %>
 	<article id="<%= dom_id product %>" class="span4 default product">
 
 		<% if admin_user? %>
