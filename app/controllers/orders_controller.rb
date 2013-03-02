@@ -12,8 +12,8 @@ class OrdersController < ApplicationController
     
     if @order.save && @order.purchase(current_user)
       
-      OrdersMailer.order_confirmation(current_user).deliver
-      OrdersMailer.order_notification(current_user).deliver
+      # OrdersMailer.order_confirmation(current_user).deliver
+      # OrdersMailer.order_notification(current_user).deliver
       render 'success'
     else
       render 'new'
