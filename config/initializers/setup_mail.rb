@@ -1,9 +1,11 @@
 ActionMailer::Base.smtp_settings = {
-  :port           => 25, 
-  :address        => "smtp.sendgrid.net",
-  :user_name      => ENV['SENDGRID_USERNAME'],
-  :password       => ENV['SENDGRID_PASSWORD'],
-  :domain         => 'komana.herokuapp.com'
+  :user_name => ENV['SENDGRID_USERNAME'],
+  :password => ENV['SENDGRID_PASSWORD'],,
+  :domain => "www.komanda.us",
+  :address => "smtp.sendgrid.net",
+  :port => 587,
+  :authentication => :plain,
+  :enable_starttls_auto => true
 }
 # ActionMailer::Base.delivery_method = :smtp
 
