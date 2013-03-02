@@ -1,6 +1,6 @@
 ActionMailer::Base.smtp_settings = {
   :user_name => ENV['SENDGRID_USERNAME'],
-  :password => ENV['SENDGRID_PASSWORD'],,
+  :password => ENV['SENDGRID_PASSWORD'],
   :domain => "www.komanda.us",
   :address => "smtp.sendgrid.net",
   :port => 587,
