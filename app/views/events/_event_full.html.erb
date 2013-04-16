@@ -14,7 +14,7 @@
 </h2>
 
 <% if @winner %>
-	<div class="well well-large center" style="color:orange;font-size:18px">
+	<div class="well well-large center hide" style="color:orange;font-size:18px">
 		Congratulations, 
 		<%= link_to @winner.profile_url, target: "_blank" do %>
 		 	<%= @winner.name %>
